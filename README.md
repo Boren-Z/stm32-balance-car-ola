@@ -1,7 +1,7 @@
 # STM32F103 Self-Balancing Robot
-
+<p align="center">
 <img width="410" height="370" alt="Demo" src="https://github.com/user-attachments/assets/e9bb6225-1f8c-4596-9498-22e8c29d221b" />
-
+</p>
 A two-wheeled self-balancing robot built from scratch on the STM32F103C8T6 using the Standard Peripheral Library, structured around a self-designed **5-layer "OLA" architecture** (Orthogonal Layering Architecture) combined with defensive programming principles.
 
 Currently running a four-loop cascade PID + complementary filter; a future upgrade path to **LQR + Kalman filter** is planned (see Roadmap).
