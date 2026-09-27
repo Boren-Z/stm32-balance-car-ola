@@ -4,7 +4,9 @@
 </p>
 A two-wheeled self-balancing robot built from scratch on the STM32F103C8T6 using the Standard Peripheral Library, structured around a self-designed **5-layer "OLA" architecture** (Orthogonal Layering Architecture) combined with defensive programming principles.
 
-Currently running a four-loop cascade PID + complementary filter; a future upgrade path to **LQR + Kalman filter** is planned (see Roadmap).
+Currently running a four-loop cascade PID + complementary filter; a future upgrade path to **LQR + Kalman filter** is planned.
+
+Based on the previous knowledge that was implemented in [STM32 Furuta inverted pendulum](https://github.com/Boren-Z/stm32-furuta-inverted-pendulum), and combining it with my Master's graduation project, a self-developed Orthogonal Layering Architecture for electromechanical systems is successfully applied.
 
 ---
 
@@ -89,12 +91,12 @@ Inspired by the IEC 61131-3 / CODESYS environment that, from my graduation proje
 | PLC's automatically managed scan cycle | Manually implemented here via the SysTick 1ms time base |
 | Retentive/persistent variables (`VAR RETAIN`) | No non-volatile state is currently persisted across resets |
 
-The biggest practical difference: a PLC runtime guarantees scan-cycle timing and re-entrancy for you. On bare-metal STM32, the scheduling layer has to *build* that guarantee itself, which is exactly why the foreground/background need to be separated, and the flag-based handoff between them exists as a substitute for what a PLC scan cycle provides.
+The biggest practical difference: a PLC runtime guarantees scan-cycle timing and re-entrancy. On bare-metal STM32, the scheduling layer has to *build* that guarantee itself, which is exactly why the foreground/background need to be separated, and the flag-based handoff between them exists as a substitute for what a PLC scan cycle provides.
 
 ---
 ## Engineering Highlights
 
-A few implementation details worth calling out beyond the standard textbook approach:
+A few implementation details worth calling:
 
 **Improved T-method speed measurement.** 
 Encoder speed is measured with a *modified* T-method rather than the pure T-method (single-interval timing) or pure M-method (pulse-counting over a fixed window). In this project, the speed measurement combines interrupt-based edge-timing with the practical trade-offs both pure methods run into at low and high speed.
@@ -130,8 +132,6 @@ This project is built in **Keil MDK5** using the STM32 Standard Peripheral Libra
 1. Open `Balance_Project.uvprojx` in Keil5
 2. Build (F7)
 3. Flash via ST-Link (SWD)
-
-> Note: this repository does not use FreeRTOS yet (see Roadmap) — task scheduling is currently a hand-written foreground/background model driven by SysTick.
 
 ---
 
