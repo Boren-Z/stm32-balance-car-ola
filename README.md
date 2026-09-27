@@ -2,9 +2,9 @@
 <p align="center">
 <img width="410" height="370" alt="Demo" src="https://github.com/user-attachments/assets/e9bb6225-1f8c-4596-9498-22e8c29d221b" />
 </p>
-A two-wheeled self-balancing robot built from scratch on the STM32F103C8T6 using the Standard Peripheral Library, structured around a self-designed **5-layer "OLA" architecture** (Orthogonal Layering Architecture) combined with defensive programming principles.
+A two-wheeled self-balancing robot built from scratch on the STM32F103C8T6 using the Standard Peripheral Library, structured around a self-designed five-layer "OLA" (Orthogonal Layering Architecture) combined with defensive programming principles.
 
-Currently running a four-loop cascade PID + complementary filter; a future upgrade path to **LQR + Kalman filter** is planned.
+It currently runs a four-loop cascade PID + complementary filter; a future upgrade path to **LQR + Kalman filter** is planned.
 
 Based on the previous knowledge that was implemented in [STM32 Furuta inverted pendulum](https://github.com/Boren-Z/stm32-furuta-inverted-pendulum), and combining it with my Master's graduation project, a self-developed Orthogonal Layering Architecture for electromechanical systems is successfully applied.
 
@@ -85,7 +85,7 @@ Inspired by the IEC 61131-3 / CODESYS environment that, from my graduation proje
 | **Scan Cycle**| `main()` while(1) loop, gated by tick-interval checks |
 | **Event Task**  | `SysTick_Handler`, `ADC1_2_IRQHandler`, etc. |
 | **GVL**  | `static volatile` variables shared between an ISR and the main loop |
-| **Function Block (FB)** encapsulation | Each `.c`/`.h` module pair — private `VAR` state, public `Init`/`Set`/`Get` interface |
+| **Function Block (FB)** encapsulation | Each `.c`/`.h` module pair with private `VAR` state and public `Set`/`Get` interface |
 | FB instance's private/internal variables | `static` variables inside a `.c` file, invisible outside the module |
 | FB's `VAR_INPUT` / `VAR_OUTPUT` | This project's `Set*()` / `Get*()` interface functions |
 | PLC's automatically managed scan cycle | Manually implemented here via the SysTick 1ms time base |
@@ -121,7 +121,7 @@ Beyond the three motion loops (velocity → angle → angular velocity), a 4th i
 - **IMU**: MPU6050 (I2C)
 - **Motor driver**: TB6612FNG
 - **Encoders**: quadrature, interrupt-based edge-timing (modified  T-method) speed measurement
-- **Battery sensing**: resistor-divider into ADC, PWM-level compensation for voltage sag
+- **Battery sensing**: resistor divider into ADC, PWM-level compensation for voltage sag
 
 ---
 
